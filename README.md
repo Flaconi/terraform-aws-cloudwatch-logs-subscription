@@ -18,7 +18,7 @@ Template for Terraform modules
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 
 <!-- TFDOCS_PROVIDER_END -->
 
@@ -28,7 +28,7 @@ Template for Terraform modules
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
 
 <!-- TFDOCS_REQUIREMENTS_END -->
 
@@ -39,7 +39,7 @@ The following input variables are required:
 
 ### <a name="input_log_filters"></a> [log\_filters](#input\_log\_filters)
 
-Description: Object to define log filters.
+Description: List of objects to define log filters
 
 Type:
 
@@ -50,7 +50,7 @@ list(object({
     role_arn              = optional(string, "")       # role ARN to use for subscription
     destination_arn       = optional(string, "")       # ARN of the destination used for all filter subscriptions (e.g., Lambda function, Kinesis stream, etc.)
     filter_pattern        = optional(string, "")       # metric filters, subscription filters, and filter log events
-    exclusion_pattern     = optional(list(string), []) # regex to exclude specific log groups which matches.
+    exclusion_pattern     = optional(list(string), []) # regex to exclude specific log groups which matches
   }))
 ```
 
@@ -58,25 +58,25 @@ list(object({
 
 The following input variables are optional (have default values):
 
-### <a name="input_filter_name_overwrite"></a> [filter\_name\_overwrite](#input\_filter\_name\_overwrite)
+### <a name="input_default_filter_name"></a> [default\_filter\_name](#input\_default\_filter\_name)
 
-Description: Name overwrite for filter subscriptions.
+Description: default filter name if filter\_name is omitted in log\_filters
 
 Type: `string`
 
 Default: `"logfilter"`
 
-### <a name="input_destination_arn_overwrite"></a> [destination\_arn\_overwrite](#input\_destination\_arn\_overwrite)
+### <a name="input_default_destination_arn"></a> [default\_destination\_arn](#input\_default\_destination\_arn)
 
-Description: ARN of the destination (overwrite for omitted destination\_arn in log\_filters)
+Description: default ARN of destination if destination\_arn is omitted in log\_filters
 
 Type: `string`
 
 Default: `""`
 
-### <a name="input_role_arn_overwrite"></a> [role\_arn\_overwrite](#input\_role\_arn\_overwrite)
+### <a name="input_default_role_arn"></a> [default\_role\_arn](#input\_default\_role\_arn)
 
-Description: ARN of the role to use for subscription
+Description: default ARN of the role if role\_arn is omitted in log\_filters
 
 Type: `string`
 

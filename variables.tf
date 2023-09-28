@@ -1,18 +1,18 @@
-variable "filter_name_overwrite" {
+variable "default_filter_name" {
   type        = string
   default     = "logfilter"
-  description = "Name overwrite for filter subscriptions."
+  description = "default filter name if filter_name is omitted in log_filters"
 }
 
-variable "destination_arn_overwrite" {
+variable "default_destination_arn" {
   type        = string
-  description = "ARN of the destination (overwrite for omitted destination_arn in log_filters)"
+  description = "default ARN of destination if destination_arn is omitted in log_filters"
   default     = ""
 }
 
-variable "role_arn_overwrite" {
+variable "default_role_arn" {
   type        = string
-  description = "ARN of the role to use for subscription"
+  description = "default ARN of the role if role_arn is omitted in log_filters"
   default     = ""
 }
 
@@ -23,7 +23,7 @@ variable "log_filters" {
     role_arn              = optional(string, "")       # role ARN to use for subscription
     destination_arn       = optional(string, "")       # ARN of the destination used for all filter subscriptions (e.g., Lambda function, Kinesis stream, etc.)
     filter_pattern        = optional(string, "")       # metric filters, subscription filters, and filter log events
-    exclusion_pattern     = optional(list(string), []) # regex to exclude specific log groups which matches.
+    exclusion_pattern     = optional(list(string), []) # regex to exclude specific log groups which matches
   }))
-  description = "Object to define log filters."
+  description = "List of objects to define log filters"
 }

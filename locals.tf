@@ -7,13 +7,6 @@ locals {
     Project = "cwdata"
   }
 
-
-  #    exclusion_pattern = var.exclusion_pattern
-  #
-  #    relevant_groupnames = [ for item in data.aws_cloudwatch_log_groups.example.log_group_names :
-  #      item if !anytrue([ for exclusion_pattern in local.exclusion_pattern : can(regex(exclusion_pattern, item))])
-  #    ]
-
   matched_lgroups = flatten([
     for idx, filter in var.log_filters : [
       for log_group in data.aws_cloudwatch_log_groups.log_groups[idx].log_group_names :
